@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="hi" class="notranslate">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google" content="notranslate">
+    <title>Bhakti Bhajan - Spirituality in Harmony</title>
+    <style>
+        :root {
+            --bg-color: #fdf5ed; 
+            --header-bg: #ffffff;
+            --card-container-bg: #ffffff;
+            --text-main: #2d3748;
+            --text-title: #4a1504;
+            --text-muted: #718096;
+            --brand-orange: #e67e22;
+            --border-color: #e2e8f0;
+            --input-bg: #ffffff;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 10px 25px rgba(165, 42, 42, 0.04);
+            --shadow-lg: 0 15px 30px rgba(230, 81, 0, 0.08);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-orange: linear-gradient(135deg, #ff9933, #e65100);
+            --nav-active-bg: rgba(230, 126, 34, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --header-bg: #1a1a1a;
+            --card-container-bg: #1a1a1a;
+            --text-main: #f3f4f6;
+            --text-title: #ff9933;
+            --text-muted: #a0aec0;
+            --border-color: #2d2d2d;
+            --input-bg: #2d2d2d;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
+            --shadow-md: 0 10px 25px rgba(0,0,0,0.3);
+            --shadow-lg: 0 15px 35px rgba(0,0,0,0.4);
+            --nav-active-bg: rgba(255, 153, 51, 0.15);
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none !important;
+            box-sizing: border-box;
+            -webkit-user-select: none !important;  
+            -moz-user-select: none !important;     
+            -ms-user-select: none !important;      
+            user-select: none !important;          
+        }
+
+        input, select, textarea {
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0 0 120px 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand-container { display: flex; align-items: center; gap: 10px; }
+        .brand-logo-circle { width: 38px; height: 38px; background: var(--gradient-orange); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 18px; font-weight: bold; }
+        .brand-text-group { display: flex; flex-direction: column; }
+        .brand-title { font-size: 1.15rem; font-weight: 800; color: var(--text-title); margin: 0; line-height: 1.2; }
+        .brand-tagline { font-size: 0.62rem; font-weight: 700; color: var(--brand-orange); margin: 1px 0 0 0; letter-spacing: 1px; text-transform: uppercase; }
+
+        .header-actions { display: flex; align-items: center; gap: 8px; }
+        .circle-action-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--header-bg); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .circle-action-btn:hover { border-color: var(--brand-orange); background: var(--bg-color); }
+        .circle-action-btn svg { width: 16px; height: 16px; fill: none; stroke: var(--text-muted); stroke-width: 2; }
+
+        .main-wrapper { max-width: 950px; margin: 15px auto; padding: 0 15px; box-sizing: border-box; }
+
+        .deity-section-container {
+            background: linear-gradient(180deg, var(--card-container-bg) 0%, rgba(253, 245, 237, 0.4) 100%);
+            border-radius: var(--radius-lg); padding: 20px 15px; box-shadow: var(--shadow-lg); border: 1px solid rgba(230, 81, 0, 0.08);
+        }
+        [data-theme="dark"] .deity-section-container {
+            background: linear-gradient(180deg, var(--card-container-bg) 0%, rgba(18, 18, 18, 0.4) 100%);
+        }
+
+        .section-indicator-title { font-size: 0.8rem; font-weight: 800; color: #e65100; text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 15px 5px; display: flex; align-items: center; gap: 8px; }
+        .section-indicator-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(230, 81, 0, 0.2), transparent); }
+
+        .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        @media (min-width: 650px) { .category-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+
+        .cat-card {
+            border-radius: var(--radius-md); height: 130px; text-align: center; cursor: pointer; transition: var(--transition); border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; overflow: hidden; background-size: cover; background-position: center; padding: 12px; box-sizing: border-box; box-shadow: var(--shadow-sm);
+        }
+        .cat-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0, 0, 0, 0.75) 100%); z-index: 1; }
+        .cat-card:hover { transform: translateY(-4px); border-color: var(--brand-orange); }
+        .cat-title { font-size: 0.95rem; font-weight: 800; margin: 0 0 4px 0; color: #ffffff; z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .cat-count { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: #ffffff; z-index: 2; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); padding: 3px 8px; border-radius: 20px; }
+
+        .music-track-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
+        @media (min-width: 600px) { .music-track-grid { grid-template-columns: 1fr 1fr; } }
+
+        .track-card {
+            display: flex; align-items: center; gap: 15px; background: var(--header-bg); border: 1px solid var(--border-color); padding: 12px; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); transition: var(--transition); max-width: 100%; overflow: hidden;
+        }
+        .track-card:hover { border-color: var(--brand-orange); }
+        .track-img { width: 55px; height: 55px; border-radius: 12px; object-fit: cover; background: #eee; }
+        .track-details { flex: 1; min-width: 0; }
+        .track-name { font-size: 0.95rem; font-weight: 700; margin: 0; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+        .track-play-btn { background: var(--gradient-orange); border: none; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.2); }
+        .track-play-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+        .content-box { background: var(--card-container-bg); padding: 20px 15px; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); box-sizing: border-box; }
+        .user-search-wrapper { margin: 15px 0; position: relative; }
+        .user-search-wrapper input, .user-search-wrapper select { padding: 12px 20px; font-size: 14px; border-radius: 25px; border: 1px solid var(--border-color); width: 100%; box-sizing: border-box; background: var(--input-bg); color: var(--text-main); outline: none; }
+
+        ul#bhajan-list { list-style: none; padding: 0; margin: 0; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; }
+        ul#bhajan-list li { padding: 14px 16px; border-bottom: 1px solid var(--border-color); background: var(--header-bg); transition: var(--transition); }
+        ul#bhajan-list li:last-child { border-bottom: none; }
+        ul#bhajan-list a { text-decoration: none; color: var(--text-main); font-weight: 700; cursor: pointer; display: block; font-size: 14px; }
+        ul#bhajan-list li:hover { background: var(--nav-active-bg); }
+
+        pre#bhajan-lyrics { text-align: center; font-size: 1.05rem; line-height: 1.8; white-space: pre-wrap; background: var(--bg-color); padding: 15px; border-radius: var(--radius-md); border-top: 4px solid var(--brand-orange); color: var(--text-main); margin: 0; }
+
+        .admin-auth-card { max-width: 100%; width: 380px; margin: 30px auto; background: var(--card-container-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-color); }
+        .admin-auth-header { background: var(--gradient-orange); padding: 25px 15px; text-align: center; color: #ffffff; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .admin-auth-logo-circle { width: 50px; height: 50px; background: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #e65100; font-size: 24px; font-weight: bold; }
+        .admin-auth-title { font-size: 1.3rem; font-weight: 800; margin: 0; }
+        .admin-auth-body { padding: 25px 20px; }
+        .admin-field-label { font-size: 0.7rem; font-weight: 800; color: #d35400; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        
+        .password-input-wrapper { position: relative; width: 100%; }
+        .admin-capsule-input { width: 100%; padding: 12px 45px 12px 15px; border-radius: 30px; border: 1px solid #dfdfdf; background: var(--input-bg); color: var(--text-main); outline: none; box-sizing: border-box; }
+        .password-toggle-eye { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); }
+        .password-toggle-eye svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+        .admin-capsule-btn { width: 100%; padding: 12px; border-radius: 30px; background: var(--gradient-orange); border: none; color: #ffffff; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 15px; }
+        
+        .admin-dashboard-panel { display: none; }
+        .admin-grid { display: grid; grid-template-columns: 1fr; gap: 20px; width : 100%;}
+        @media (min-width: 750px) { .admin-grid { grid-template-columns: 1fr 1fr; } }
+        form { background: var(--card-container-bg); padding: 15px; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; width : 100% ; box-sizing : border-box;}
+        
+        input, select, textarea { padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--input-bg); color: var(--text-main); width: 100%; max-width : 100%; box-sizing: border-box; }
+        
+        button[type="submit"], #updateAdminPasswordBtn { background: var(--gradient-orange); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; width:100% ; max-width:100%; box-sizing:border-box; white-space:normal;}
+        
+        .admin-actions-holder { display: flex; gap: 6px; align-items: center; }
+        .prof-btn {
+            width: 34px; height: 34px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: var(--transition); background: var(--header-bg);
+        }
+        .prof-btn svg { width: 15px; height: 15px; fill: none; stroke-width: 2; }
+        
+        .prof-edit-btn { color: #2b6cb0; border-color: #bee3f8; }
+        .prof-edit-btn:hover { background: #ebf8ff; }
+        .prof-edit-btn svg { stroke: #2b6cb0; }
+        
+        .prof-delete-btn { color: #c53030; border-color: #fed7d7; }
+        .prof-delete-btn:hover { background: #fff5f5; }
+        .prof-delete-btn svg { stroke: #c53030; }
+
+        .list-wrapper { max-height: 380px; overflow-y: auto; border: 1px solid var(--border-color); border-radius: 12px; background: var(--header-bg); margin-bottom: 15px; box-shadow: var(--shadow-sm); position: relative; -webkit-overflow-scrolling: touch; }
+        
+        .admin-draggable-cat-item {
+            padding: 12px 16px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; font-size: 14px; background: var(--header-bg); position: relative; z-index: 1; color: var(--text-main);
+        }
+        
+        .admin-draggable-cat-item.dragging {
+            opacity: 0.5; background: rgba(230, 126, 34, 0.15) !important; border: 1px dashed var(--brand-orange); box-shadow: var(--shadow-md);
+        }
+
+        .drag-handle { cursor: move; padding: 8px 12px; color: var(--text-muted); display: inline-flex; align-items: center; font-size: 18px; touch-action: none; }
+
+        .bottom-nav {
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 450px; height: 65px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 35px; display: flex; justify-content: space-around; align-items: center; z-index: 999; box-shadow: 0 12px 35px rgba(165, 42, 42, 0.15); padding: 0 5px; box-sizing: border-box; }
+        [data-theme="dark"] .bottom-nav { background: rgba(26, 26, 26, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5); }
+
+        .nav-item { display: flex; flex-direction: column; align-items: center; background: none; border: none; cursor: pointer; color: var(--text-muted); font-weight: 700; font-size: 0.65rem; text-transform: uppercase; gap: 4px; padding: 6px 16px; border-radius: 20px; }
+        .nav-item svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+        .nav-item:hover, .nav-item.active-nav { color: var(--brand-orange); }
+
+        .nav-om-center { width: 50px; height: 50px; background: var(--gradient-orange); color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; box-shadow: 0 6px 15px rgba(230, 81, 0, 0.35); transform: translateY(-12px); cursor: pointer; border: 4px solid var(--bg-color); transition: border-color 0.3s; }
+
+        .app-section { display: none; }
+        .active { display: block; }
+
+        .password-settings-box { background: rgba(230, 126, 34, 0.05); border: 1px dashed var(--brand-orange); border-radius: var(--radius-md); padding: 15px; margin-bottom: 20px; }
+        
+        .persistent-player-footer {
+            position: fixed; bottom: 95px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 500px; background: var(--header-bg); border: 1px solid var(--border-color); border-radius: 30px; box-shadow: var(--shadow-lg); display: none; align-items: center; justify-content: space-between; padding: 10px 20px; box-sizing: border-box; z-index: 998;
+        }
+        .footer-track-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+        .footer-track-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; animation: spin 4s linear infinite; animation-play-state: paused; }
+        .footer-track-meta { min-width: 0; }
+        .footer-title { font-size: 0.85rem; font-weight: 800; margin: 0; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .footer-status { font-size: 0.7rem; color: var(--brand-orange); font-weight: 600; margin: 0; }
+        .footer-controls-btn { background: var(--gradient-orange); border: none; width: 38px; height: 38px; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        @keyframes professionalMarquee {
+            0% { transform: translateX(0); }
+            15% { transform: translateX(0); }
+            85% { transform: translateX(var(--scroll-distance)); }
+            100% { transform: translateX(var(--scroll-distance)); }
+        }
+
+        .track-name-container { overflow: hidden; width: 100%; white-space: nowrap; position: relative; }
+        .track-name { display: inline-block; transition: opacity 0.3s; }
+        .track-name.scrolling { animation: professionalMarquee 12s linear infinite; }
+        
+        input[type="file"] { padding: 8px; font-size: 13px; max-width: 100%; overflow: hidden; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-container">
+            <div class="brand-logo-circle" id="brandHomeTrigger" style="cursor:pointer;">ॐ</div>
+            <div class="brand-text-group">
+                <h1 class="brand-title">Bhakti Bhajan</h1>
+                <p class="brand-tagline">Spirituality in Harmony</p>
+            </div>
+        </div>
+        <div class="header-actions">
+            <button class="circle-action-btn" id="themeToggleBtn"><svg viewBox="0 0 24 24" id="moonIcon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+            <button class="circle-action-btn" id="navAdminBtn"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></button>
+        </div>
+    </header>
+
+    <section id="home-section" class="app-section active">
+        <div class="main-wrapper">
+            <div class="deity-section-container">
+                <div class="section-indicator-title">Bhajan Gallery</div>
+                <div class="category-grid" id="category-grid-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="music-gallery-section" class="app-section">
+        <div class="main-wrapper">
+            <div class="content-box">
+                <h2 style="margin: 0; font-weight: 800; font-size: 1.3rem; color: var(--text-title); display:flex; align-items:center; gap:8px;">🎵 Spiritual Music Gallery</h2>
+                <div class="user-search-wrapper">
+                    <input type="text" id="userMusicSearchInput" placeholder="Music ya bhajan track search karein...">
+                </div>
+                <div class="music-track-grid" id="music-gallery-tracks-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="list-section" class="app-section">
+        <div class="main-wrapper">
+            <div class="content-box">
+                <h2 id="category-title" style="margin: 0; font-weight: 800; font-size: 1.3rem; color: var(--text-title);">Bhajan List</h2>
+                <div class="user-search-wrapper"><input type="text" id="userBhajanSearch" placeholder="English ya Hindi me likhkar khojein..."></div>
+                <ul id="bhajan-list"></ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="lyrics-section" class="app-section">
+        <div class="main-wrapper">
+            <div class="content-box">
+                <h2 id="bhajan-title" style="color: #d35400; font-weight: 800; font-size: 1.4rem; margin:0 0 15px 0;">Bhajan Title</h2>
+                <pre id="bhajan-lyrics">Loading...</pre>
+            </div>
+        </div>
+    </section>
+
+    <section id="admin-section" class="app-section">
+        <div class="main-wrapper">
+            <div class="admin-auth-card" id="adminGatekeeperCard">
+                <div class="admin-auth-header"><div class="admin-auth-logo-circle">ॐ</div><h2 class="admin-auth-title">Admin Screen</h2></div>
+                <div class="admin-auth-body">
+                    <span class="admin-field-label">Password</span>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="adminGatekeeperPassword" class="admin-capsule-input" placeholder="•••••">
+                        <button type="button" class="password-toggle-eye" id="passwordToggleEyeBtn"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+                    </div>
+                    <button id="adminGatekeeperLoginBtn" class="admin-capsule-btn">Login Control Panel</button>
+                </div>
+            </div>
+
+            <div class="admin-dashboard-panel" id="adminDashboardControlPanel">
+                <div class="content-box">
+                    <h2 style="margin-top:0; font-weight:800; color:var(--text-title); font-size: 1.4rem;">Admin Control Center</h2>
+                    
+                    <div class="password-settings-box">
+                        <h3 style="margin: 0 0 10px 0; color: #e65100; font-size: 1.1rem;">🔐 Change Panel Credentials</h3>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <input type="password" id="adminSecretCodeInput" placeholder="Secret Validation Key Code" required>
+                            <input type="password" id="adminNewPasswordInput" placeholder="Naya Dashboard Password" required>
+                            <button type="button" id="updateAdminPasswordBtn">Update Password</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-grid">
+                        <div>
+                            <form id="directMusicForm">
+                                <h3 id="musicFormHeader" style="margin:0; color:#e65100; font-size: 1.1rem;">🎵 Add Music Gallery Track</h3>
+                                <input type="hidden" id="editMusicId">
+                                <input type="hidden" id="existingMusicImgUrl">
+                                <input type="text" id="adminTrackTitle" placeholder="Song Title (e.g., Achutam Keshavam)" required>
+                                <input type="url" id="adminTrackAudioUrl" placeholder="GitHub Audio Link" required>
+                                <span class="admin-field-label" style="margin-top: 5px;">Music Poster Photo Choose Karein</span>
+                                <input type="file" id="adminTrackImgFile" accept="image/*">
+                                <button type="submit" id="musicTrackSubmitBtn">Upload Track to Server</button>
+                            </form>
+
+                            <form id="categoryForm">
+                                <h3 id="categoryFormHeader" style="margin:0; color:#d35400; font-size: 1.1rem;">📁 Create Category</h3>
+                                <input type="hidden" id="editCatId">
+                                <input type="hidden" id="existingImgUrl">
+                                <input type="text" id="catName" placeholder="Category Name" required>
+                                <input type="file" id="catImageFile" accept="image/*">
+                                <button type="submit" id="categorySubmitBtn">Save Category</button>
+                            </form>
+                            
+                            <form id="bhajanForm">
+                                <h3 id="bhajanFormHeader" style="margin:0; color:#d35400; font-size: 1.1rem;">📜 Add Bhajan Lyrics & Audio</h3>
+                                <input type="hidden" id="editBhajanId">
+                                <select id="bhajanCategory" required></select>
+                                <input type="text" id="bhajanTitle" placeholder="Bhajan Title" required>
+                                <input type="url" id="bhajanAudioUrl" placeholder="GitHub Audio Link (Optional)">
+                                <textarea id="bhajanLyrics" rows="5" placeholder="Write lyrics text lines..." required></textarea>
+                                <button type="submit" id="bhajanSubmitBtn">Upload Lyrics Data</button>
+                            </form>
+                        </div>
+                        <div>
+                            <h3 style="margin-top:0; font-size: 1.2rem;">Manage Music Gallery</h3>
+                            <div class="list-wrapper"><ul id="admin-music-tracks-list"></ul></div>
+
+                            <h3 style="margin-top:10px; font-size: 1.2rem;">Manage Categories (Auto-Scroll Drag & Drop)</h3>
+                            <div class="list-wrapper" id="catListWrapperElement"><ul id="admin-cat-list"></ul></div>
+                            
+                            <h3 style="margin-top:10px; font-size: 1.2rem;">Manage Lyrics</h3>
+                            <div class="user-search-wrapper" style="margin: 5px 0 10px 0;">
+                                <select id="adminBhajanCategoryFilter" style="border-radius: 8px; padding: 10px;">
+                                    <option value="all">✨ Sabhi Bhajans Dekhein (All)</option>
+                                </select>
+                            </div>
+                            <div class="list-wrapper"><ul id="admin-bhajan-list"></ul></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="persistent-player-footer" id="globalMediaBottomControls">
+        <div class="footer-track-info">
+            <img src="" class="footer-track-img" id="footerPlayerThumb" alt="Thumb">
+            <div class="footer-track-meta">
+                <p class="footer-title" id="footerPlayerTitle">No Track Playing</p>
+                <p class="footer-status" id="footerPlayerStatus">Playing...</p>
+            </div>
+        </div>
+        <button class="footer-controls-btn" id="footerPlayPauseActionButton">
+            <svg viewBox="0 0 24 24" id="footerControlIcon" width="16" height="16" fill="white"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="nav-item" id="bottomNavMusicGallery">
+            <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <span>Music</span>
+        </button>
+        <div class="nav-om-center" id="bottomNavHomeCenterTrigger">ॐ</div>
+        <button class="nav-item" id="bottomNavBack">
+            <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back</span>
+        </button>
+    </nav>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set, get, child, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCSmu91AjIC3sT4r18Ydum7K3Tf3UYWwfM",
+            authDomain: "bhajan-d30a7.firebaseapp.com",
+            databaseURL: "https://bhajan-d30a7-default-rtdb.firebaseio.com",
+            projectId: "bhajan-d30a7",
+            storageBucket: "bhajan-d30a7.firebasestorage.app",
+            messagingSenderId: "677710180091",
+            appId: "1:677710180091:web:f7b96aa1981dc4adb38a5e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let currentActiveSection = "home-section";
+        let navigationHistory = ["home-section"];
+        let masterBhajansList = [];
+        let masterCategoriesArray = []; 
+        let masterMusicTracksArray = [];
+        let masterCategoriesData = {}; 
+        let selectedCategoryGlobalId = null; 
+
+        const CoreAudioStreamer = new Audio();
+        let activePlayingTrackObject = null;
+
+        const hingesheMap = {
+            'a': '[अआा]', 'aa': '[आा]', 'b': 'ब', 'bh': 'भ', 'c': '[चक]', 'ch': 'च', 'chh': 'छ',
+            'd': '[दड]', 'dh': '[धढ]', 'e': '[एेे]', 'ee': '[ईी]', 'f': 'फ', 'g': 'ग', 'gh': 'घ',
+            'h': 'ह', 'i': '[इीिी]', 'j': 'ज', 'jh': 'झ', 'k': 'क', 'kh': 'ख', 'l': 'ल',
+            'm': '[मं]', 'n': '[नणंव]', 'o': '[ओो]', 'oo': '[ऊू]', 'p': 'प', 'ph': 'फ', 'r': 'र',
+            's': '[सशष]', 'sh': '[शष]', 't': '[तट]', 'th': '[थठ]', 'u': '[उूुू]', 'v': '[वब]',
+            'w': 'व', 'y': 'य', 'z': 'ज'
+        };
+
+        function generateFuzzyRegexPattern(englishText) {
+            let processed = englishText.toLowerCase().replace(/[^a-z]/g, '');
+            if(!processed) return null;
+            let regexStr = "";
+            let i = 0;
+            while(i < processed.length) {
+                if(i + 2 <= processed.length && hingesheMap[processed.substr(i, 2)]) {
+                    regexStr += hingesheMap[processed.substr(i, 2)];
+                    i += 2;
+                } else if(hingesheMap[processed[i]]) {
+                    regexStr += hingesheMap[processed[i]];
+                    i += 1;
+                } else {
+                    regexStr += processed[i];
+                    i += 1;
+                }
+                regexStr += ".*"; 
+            }
+            try { return new RegExp(regexStr, 'i'); } catch(e) { return null; }
+        }
+
+        function sanitizeRawMediaUrl(link) {
+            if (!link) return "";
+            let cleanLink = link.trim();
+            if (cleanLink.includes("github.com") && cleanLink.includes("/blob/")) {
+                cleanLink = cleanLink.replace("github.com", "raw.githubusercontent.com").replace("/blob/", "/");
+            } else if (cleanLink.includes("github.com") && !cleanLink.includes("raw.githubusercontent.com")) {
+                cleanLink = cleanLink.replace("github.com", "raw.githubusercontent.com").replace("/main/", "/main/").replace("/master/", "/master/");
+            }
+            if (cleanLink.includes("drive.google.com")) {
+                let idMatch = cleanLink.match(/\/d\/([^/]+)/);
+                if (idMatch && idMatch[1]) return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+            }
+            return cleanLink;
+        }
+
+        function navigateTo(sectionId) {
+            if (currentActiveSection === "admin-section" && sectionId !== "admin-section") {
+                document.getElementById('adminDashboardControlPanel').style.display = "none";
+                document.getElementById('adminGatekeeperCard').style.display = "block";
+                document.getElementById('adminGatekeeperPassword').value = "";
+            }
+            currentActiveSection = sectionId;
+            document.querySelectorAll('.app-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('bottomNavMusicGallery').classList.toggle('active-nav', sectionId === 'music-gallery-section');
+            window.scrollTo(0,0);
+        }
+
+        function pushNavigation(sectionId) {
+            if (navigationHistory[navigationHistory.length - 1] !== sectionId) navigationHistory.push(sectionId);
+            navigateTo(sectionId);
+        }
+
+        document.getElementById('brandHomeTrigger').addEventListener('click', () => { navigationHistory = ["home-section"]; navigateTo("home-section"); });
+        document.getElementById('bottomNavHomeCenterTrigger').addEventListener('click', () => { navigationHistory = ["home-section"]; navigateTo("home-section"); });
+        document.getElementById('bottomNavMusicGallery').addEventListener('click', () => { pushNavigation('music-gallery-section'); });
+        document.getElementById('bottomNavBack').addEventListener('click', () => {
+            if (navigationHistory.length > 1) { navigationHistory.pop(); navigateTo(navigationHistory[navigationHistory.length - 1]); } 
+            else { navigateTo("home-section"); }
+        });
+        document.getElementById('navAdminBtn').addEventListener('click', () => { pushNavigation('admin-section'); });
+
+        document.getElementById('adminGatekeeperLoginBtn').addEventListener('click', async () => {
+            const typedPassword = document.getElementById('adminGatekeeperPassword').value;
+            try {
+                const adminSettingsSnap = await get(child(ref(db), 'adminSettings'));
+                let databasePassword = "JaiShreeRam@123"; 
+                let databaseSecret = "1008"; 
+                
+                if (adminSettingsSnap.exists()) {
+                    databasePassword = adminSettingsSnap.val().password || databasePassword;
+                    databaseSecret = adminSettingsSnap.val().secretCode || databaseSecret;
+                } else {
+                    await set(ref(db, 'adminSettings'), { password: databasePassword, secretCode: databaseSecret });
+                }
+
+                if(typedPassword === databasePassword) {
+                    document.getElementById('adminGatekeeperCard').style.display = "none";
+                    document.getElementById('adminDashboardControlPanel').style.display = "block";
+                    initAdminPanel();
+                } else { 
+                    alert("Galat Password!"); 
+                }
+            } catch (err) { alert("Database Sync Error!"); }
+        });
+
+        document.getElementById('updateAdminPasswordBtn').addEventListener('click', async function() {
+            const secretCodeInput = document.getElementById('adminSecretCodeInput').value;
+            const newPasswordInput = document.getElementById('adminNewPasswordInput').value;
+            if(!secretCodeInput || !newPasswordInput) { alert("Dono field bharein!"); return; }
+            try {
+                const snapshot = await get(child(ref(db), 'adminSettings'));
+                if(snapshot.exists() && secretCodeInput === snapshot.val().secretCode.toString()) {
+                    await set(ref(db, 'adminSettings/password'), newPasswordInput);
+                    alert("Password badal gaya hai!");
+                    document.getElementById('adminSecretCodeInput').value = "";
+                    document.getElementById('adminNewPasswordInput').value = "";
+                } else { alert("Galat Secret Verification Code!"); }
+            } catch(e) { alert("Updation Failed!"); }
+        });
+
+        async function loadAppCoreEngine() {
+            try {
+                const catSnap = await get(child(ref(db), 'categories'));
+                const bhajanSnap = await get(child(ref(db), 'bhajans'));
+                const musicSnap = await get(child(ref(db), 'musicTracks'));
+
+                masterCategoriesData = catSnap.exists() ? catSnap.val() : {};
+                masterCategoriesArray = Object.keys(masterCategoriesData).map(id => ({ id, ...masterCategoriesData[id] }));
+                masterCategoriesArray.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+                masterBhajansList = [];
+                if (bhajanSnap.exists()) {
+                    const bData = bhajanSnap.val();
+                    for(let id in bData) masterBhajansList.push({ id, ...bData[id] });
+                }
+
+                masterMusicTracksArray = [];
+                if (musicSnap.exists()) {
+                    const mData = musicSnap.val();
+                    for(let id in mData) masterMusicTracksArray.push({ id, ...mData[id] });
+                }
+
+                const gridContainer = document.getElementById('category-grid-container');
+                gridContainer.innerHTML = "";
+                masterCategoriesArray.forEach(cat => {
+                    const count = masterBhajansList.filter(b => b.category === cat.id).length;
+                    const card = document.createElement('div');
+                    card.className = "cat-card"; card.style.backgroundImage = `url('${cat.image || "https://images.unsplash.com/photo-1609137144813-2d6ec34fd779?w=300"}')`;
+                    card.innerHTML = `<div class="cat-title">${cat.name}</div><div class="cat-count">${count} Bhajans</div>`;
+                    card.addEventListener('click', () => {
+                        selectedCategoryGlobalId = cat.id;
+                        document.getElementById('category-title').innerText = cat.name;
+                        document.getElementById('userBhajanSearch').value = ""; 
+                        renderUserBhajansList();
+                        pushNavigation('list-section');
+                    });
+                    gridContainer.appendChild(card);
+                });
+
+                renderUserMusicGallery();
+            } catch(e) { console.error("Database sync fails", e); }
+        }
+
+        function renderUserBhajansList() {
+            const listContainer = document.getElementById('bhajan-list');
+            listContainer.innerHTML = "";
+            const searchQuery = document.getElementById('userBhajanSearch').value.trim();
+
+            const filteredBhajans = masterBhajansList.filter(b => {
+                const matchesCategory = b.category === selectedCategoryGlobalId;
+                if(!matchesCategory) return false;
+                if(!searchQuery) return true;
+
+                const textLower = searchQuery.toLowerCase();
+                const isHindiMatch = b.title.toLowerCase().includes(textLower);
+
+                if(!isHindiMatch && /^[a-zA-Z\s]+$/.test(searchQuery)) {
+                    const fuzzyPattern = generateFuzzyRegexPattern(searchQuery);
+                    return fuzzyPattern ? fuzzyPattern.test(b.title) : false;
+                }
+                return isHindiMatch;
+            });
+
+            if (filteredBhajans.length === 0) {
+                listContainer.innerHTML = `<li style="text-align:center; color:var(--text-muted); font-size:14px; padding:20px;">Koi bhajan nahi mila.</li>`;
+                return;
+            }
+
+            filteredBhajans.forEach(b => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a class="lyrics-view-link" data-id="${b.id}">✨ ${b.title}</a>`;
+                li.querySelector('.lyrics-view-link').addEventListener('click', async function() {
+                    const found = masterBhajansList.find(x => x.id === this.getAttribute('data-id'));
+                    document.getElementById('bhajan-title').innerText = found.title;
+                    document.getElementById('bhajan-lyrics').innerText = found.lyrics;
+                    pushNavigation('lyrics-section');
+
+                    if (found.url && found.url.trim() !== "") {
+                        await handleTrackPlaybackTrigger({
+                            id: found.id,
+                            title: found.title,
+                            url: found.url,
+                            image: masterCategoriesData[found.category]?.image || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150'
+                        });
+                    }
+                });
+                listContainer.appendChild(li);
+            });
+        }
+
+        document.getElementById('userBhajanSearch').addEventListener('input', renderUserBhajansList);
+
+        function renderUserMusicGallery() {
+            const trackGrid = document.getElementById('music-gallery-tracks-container');
+            const query = document.getElementById('userMusicSearchInput').value.toLowerCase().trim();
+            trackGrid.innerHTML = "";
+
+            const filteredTracks = masterMusicTracksArray.filter(t => t.title.toLowerCase().includes(query));
+            if(filteredTracks.length === 0) {
+                trackGrid.innerHTML = `<p style='grid-column:1/-1; text-align:center; color:var(--text-muted); font-size:14px; margin:20px 0;'>Koi music audio track nahi mila.</p>`;
+                return;
+            }
+
+            filteredTracks.forEach(track => {
+                const card = document.createElement('div');
+                card.className = "track-card";
+                const isCurrentPlaying = activePlayingTrackObject && activePlayingTrackObject.id === track.id && !CoreAudioStreamer.paused;
+                const buttonIcon = isCurrentPlaying 
+                    ? `<svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>` 
+                    : `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+
+                card.innerHTML = `
+                    <img src="${track.image || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150'}" class="track-img" alt="Poster">
+                    <div class="track-details">
+                        <div class="track-name-container">
+                            <p class="track-name" id="track-text-${track.id}">${track.title}</p>
+                        </div>
+                    </div>
+                    <button class="track-play-btn" data-id="${track.id}">${buttonIcon}</button>
+                `;
+
+                setTimeout(() => {
+                    const el = document.getElementById(`track-text-${track.id}`);
+                    if (el) {
+                        const containerWidth = el.parentElement.clientWidth;
+                        const textWidth = el.scrollWidth;
+
+                        if (textWidth > containerWidth) {
+                            const scrollDistance = containerWidth - textWidth - 20; 
+                            el.style.setProperty('--scroll-distance', `${scrollDistance}px`);
+                            el.classList.add('scrolling');
+                        }
+                    }
+                }, 50);
+
+                card.querySelector('.track-play-btn').addEventListener('click', async function() {
+                    await handleTrackPlaybackTrigger(track);
+                });
+                trackGrid.appendChild(card);
+            });
+        }
+        document.getElementById('userMusicSearchInput').addEventListener('input', renderUserMusicGallery);
+
+        async function handleTrackPlaybackTrigger(track) {
+            const footerBar = document.getElementById('globalMediaBottomControls');
+            const footerIcon = document.getElementById('footerControlIcon');
+            const footerImg = document.getElementById('footerPlayerThumb');
+
+            if (!track || !track.url) {
+                alert("ऑडियो लिंक उपलब्ध नहीं है या गलत है।");
+                return;
+            }
+
+            const processedUrl = sanitizeRawMediaUrl(track.url);
+
+            if (activePlayingTrackObject && activePlayingTrackObject.id === track.id) {
+                if (!CoreAudioStreamer.paused) {
+                    CoreAudioStreamer.pause();
+                    footerImg.style.animationPlayState = "paused";
+                    document.getElementById('footerPlayerStatus').innerText = "Paused";
+                    footerIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+                } else {
+                    try {
+                        await CoreAudioStreamer.play();
+                        footerImg.style.animationPlayState = "running";
+                        document.getElementById('footerPlayerStatus').innerText = "Playing...";
+                        footerIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
+                    } catch (err) {
+                        console.error("Playback error:", err);
+                        alert("ऑडियो प्ले करने में समस्या आई। कृपया यूआरएल जांचें।");
+                    }
+                }
+            } else {
+                activePlayingTrackObject = track;
+                
+                // Reset Audio Instance for iOS/Safari Support
+                CoreAudioStreamer.pause();
+                CoreAudioStreamer.removeAttribute('src');
+                CoreAudioStreamer.load();
+
+                CoreAudioStreamer.src = processedUrl;
+
+                try {
+                    await CoreAudioStreamer.play();
+
+                    footerBar.style.display = "flex";
+                    document.getElementById('footerPlayerTitle').innerText = track.title;
+                    document.getElementById('footerPlayerStatus').innerText = "Playing...";
+                    footerImg.src = track.image || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150';
+                    footerImg.style.animationPlayState = "running";
+                    footerIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
+                } catch(e) {
+                    console.error("Audio playback error: ", e);
+                    alert("यह ऑडियो फॉर्मेट इस ब्राउजर द्वारा समर्थित नहीं है। कृपया डायरेक्ट .mp3 लिंक जांचें।");
+                }
+            }
+            renderUserMusicGallery();
+        }
+
+        document.getElementById('footerPlayPauseActionButton').addEventListener('click', async () => {
+            if(activePlayingTrackObject) await handleTrackPlaybackTrigger(activePlayingTrackObject);
+        });
+        CoreAudioStreamer.addEventListener('ended', () => {
+            document.getElementById('footerPlayerThumb').style.animationPlayState = "paused";
+            document.getElementById('footerControlIcon').innerHTML = `<path d="M8 5v14l11-7z"/>`;
+            renderUserMusicGallery();
+        });
+
+        function renderAdminBhajansFilteredList() {
+            const bList = document.getElementById('admin-bhajan-list');
+            bList.innerHTML = "";
+            const selectedFilterCat = document.getElementById('adminBhajanCategoryFilter').value;
+
+            const filtered = masterBhajansList.filter(b => {
+                return (selectedFilterCat === "all" || b.category === selectedFilterCat);
+            });
+
+            if(filtered.length === 0) {
+                bList.innerHTML = `<li style="padding:12px; font-size:14px; text-align:center; color:var(--text-muted);">Is category me koi bhajan nahi mila.</li>`;
+                return;
+            }
+
+            filtered.forEach(b => {
+                const li = document.createElement('li');
+                li.className = "admin-draggable-cat-item";
+                li.innerHTML = `
+                    <span><b>${b.title}</b> ${b.url ? '🎵' : ''}</span>
+                    <div class="admin-actions-holder">
+                        <button class="prof-btn prof-edit-btn" type="button">
+                            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"></path></svg>
+                        </button>
+                        <button class="prof-btn prof-delete-btn" type="button">
+                            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                `;
+                li.querySelector('.prof-edit-btn').addEventListener('click', () => {
+                    document.getElementById('bhajanFormHeader').innerText = "📝 Edit Bhajan Lyrics";
+                    document.getElementById('editBhajanId').value = b.id;
+                    document.getElementById('bhajanCategory').value = b.category;
+                    document.getElementById('bhajanTitle').value = b.title;
+                    document.getElementById('bhajanAudioUrl').value = b.url || "";
+                    document.getElementById('bhajanLyrics').value = b.lyrics;
+                    document.getElementById('bhajanSubmitBtn').innerText = "Update Lyrics & Audio";
+                });
+                li.querySelector('.prof-delete-btn').addEventListener('click', async () => {
+                    if(confirm("Yeh bhajan delete karein?")) { 
+                        await remove(ref(db, `bhajans/${b.id}`)); 
+                        await loadAppCoreEngine(); 
+                        initAdminPanel(); 
+                    }
+                });
+                bList.appendChild(li);
+            });
+        }
+
+        async function initAdminPanel() {
+            const select = document.getElementById('bhajanCategory');
+            const filterSelect = document.getElementById('adminBhajanCategoryFilter');
+            const musicList = document.getElementById('admin-music-tracks-list');
+            const catList = document.getElementById('admin-cat-list');
+            
+            select.innerHTML = ""; 
+            filterSelect.innerHTML = `<option value="all">✨ Sabhi Bhajans Dekhein (All)</option>`;
+            musicList.innerHTML = ""; 
+            catList.innerHTML = ""; 
+
+            masterCategoriesArray.forEach((cat) => {
+                select.innerHTML += `<option value="${cat.id}">${cat.name}</option>`;
+                filterSelect.innerHTML += `<option value="${cat.id}">📁 ${cat.name}</option>`;
+                
+                const li = document.createElement('li');
+                li.className = "admin-draggable-cat-item";
+                li.setAttribute('data-id', cat.id);
+                li.innerHTML = `
+                    <div style="display:flex; align-items:center;">
+                        <span class="drag-handle">⣿</span>
+                        <b>${cat.name}</b>
+                    </div>
+                    <div class="admin-actions-holder">
+                        <button class="prof-btn prof-edit-btn" type="button">
+                            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"></path></svg>
+                        </button>
+                        <button class="prof-btn prof-delete-btn" type="button">
+                            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                `;
+
+                li.querySelector('.prof-edit-btn').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document.getElementById('categoryFormHeader').innerText = "📝 Edit Category";
+                    document.getElementById('editCatId').value = cat.id;
+                    document.getElementById('catName').value = cat.name;
+                    document.getElementById('existingImgUrl').value = cat.image || "";
+                    document.getElementById('categorySubmitBtn').innerText = "Update Category";
+                });
+
+                li.querySelector('.prof-delete-btn').addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    if(confirm("Category delete karein?")) { await remove(ref(db, `categories/${cat.id}`)); await loadAppCoreEngine(); initAdminPanel(); }
+                });
+
+                catList.appendChild(li);
+            });
+
+            setupAdvancedDynamicScrollerDragDrop(catList);
+
+            masterMusicTracksArray.forEach(track => {
+                const li = document.createElement('li');
+                li.className = "admin-draggable-cat-item"; 
+                li.innerHTML = `
+                    <span>🎵 <b>${track.title}</b></span>
+                    <div class="admin-actions-holder">
+                        <button class="prof-btn prof-edit-btn" type="button">
+                            <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z"></path></svg>
+                        </button>
+                        <button class="prof-btn prof-delete-btn" type="button">
+                            <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                        </button>
+                    </div>
+                `;
+                li.querySelector('.prof-edit-btn').addEventListener('click', () => {
+                    document.getElementById('musicFormHeader').innerText = "📝 Edit Music Track";
+                    document.getElementById('editMusicId').value = track.id;
+                    document.getElementById('adminTrackTitle').value = track.title;
+                    document.getElementById('adminTrackAudioUrl').value = track.url;
+                    document.getElementById('existingMusicImgUrl').value = track.image || "";
+                    document.getElementById('musicTrackSubmitBtn').innerText = "Update Track";
+                });
+                li.querySelector('.prof-delete-btn').addEventListener('click', async () => {
+                    if(confirm("Yeh music track delete karein?")) { await remove(ref(db, `musicTracks/${track.id}`)); await loadAppCoreEngine(); initAdminPanel(); }
+                });
+                musicList.appendChild(li);
+            });
+
+            renderAdminBhajansFilteredList();
+        }
+
+        document.getElementById('adminBhajanCategoryFilter').addEventListener('change', renderAdminBhajansFilteredList);
+
+        function setupAdvancedDynamicScrollerDragDrop(container) {
+            let selectedItem = null;
+            let scrollBox = document.getElementById('catListWrapperElement');
+            let autoScrollInterval = null;
+
+            function clearAutoScroll() {
+                if (autoScrollInterval) { clearInterval(autoScrollInterval); autoScrollInterval = null; }
+            }
+
+            function triggerAutoScrollCheck(clientY) {
+                let boxRect = scrollBox.getBoundingClientRect();
+                clearAutoScroll();
+
+                if (clientY > boxRect.bottom - 40) {
+                    autoScrollInterval = setInterval(() => { scrollBox.scrollTop += 8; }, 15);
+                } else if (clientY < boxRect.top + 40) {
+                    autoScrollInterval = setInterval(() => { scrollBox.scrollTop -= 8; }, 15);
+                }
+            }
+
+            function performSortingShift(clientY) {
+                const items = [...container.querySelectorAll('.admin-draggable-cat-item:not(.dragging)')];
+                let nextTargetNode = items.find(item => {
+                    let r = item.getBoundingClientRect();
+                    return clientY < (r.top + r.height / 2);
+                });
+                
+                if (!nextTargetNode) container.appendChild(selectedItem);
+                else container.insertBefore(selectedItem, nextTargetNode);
+            }
+
+            container.addEventListener('touchstart', (e) => {
+                if (!e.target.classList.contains('drag-handle')) return;
+                selectedItem = e.target.closest('.admin-draggable-cat-item');
+                if (selectedItem) selectedItem.classList.add('dragging');
+            }, { passive: true });
+
+            container.addEventListener('touchmove', (e) => {
+                if (!selectedItem) return;
+                let touch = e.touches[0];
+                if(e.cancelable) e.preventDefault();
+
+                triggerAutoScrollCheck(touch.clientY);
+                performSortingShift(touch.clientY);
+            }, { passive: false });
+
+            container.addEventListener('touchend', () => {
+                clearAutoScroll();
+                if (selectedItem) {
+                    selectedItem.classList.remove('dragging');
+                    saveSortingSequence(container);
+                    selectedItem = null;
+                }
+            });
+
+            container.addEventListener('mousedown', (e) => {
+                if (!e.target.classList.contains('drag-handle')) return;
+                e.preventDefault();
+                selectedItem = e.target.closest('.admin-draggable-cat-item');
+                if (selectedItem) selectedItem.classList.add('dragging');
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!selectedItem) return;
+                triggerAutoScrollCheck(e.clientY);
+                performSortingShift(e.clientY);
+            });
+
+            window.addEventListener('mouseup', () => {
+                clearAutoScroll();
+                if (selectedItem) {
+                    selectedItem.classList.remove('dragging');
+                    saveSortingSequence(container);
+                    selectedItem = null;
+                }
+            });
+        }
+
+        async function saveSortingSequence(container) {
+            const visualElements = [...container.querySelectorAll('.admin-draggable-cat-item')];
+            try {
+                for (let i = 0; i < visualElements.length; i++) {
+                    const id = visualElements[i].getAttribute('data-id');
+                    await set(ref(db, `categories/${id}/order`), i);
+                }
+                await loadAppCoreEngine();
+            } catch(e) { console.error("Ordering save error:", e); }
+        }
+
+        document.getElementById('directMusicForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const musicId = document.getElementById('editMusicId').value;
+            const title = document.getElementById('adminTrackTitle').value;
+            const url = document.getElementById('adminTrackAudioUrl').value;
+            const fileInput = document.getElementById('adminTrackImgFile').files[0];
+            const existingImg = document.getElementById('existingMusicImgUrl').value;
+
+            const submitBtn = document.getElementById('musicTrackSubmitBtn');
+            submitBtn.disabled = true; submitBtn.innerText = "Saving Data...";
+
+            let imageBase64Data = existingImg || "";
+            if (fileInput) {
+                const reader = new FileReader();
+                reader.readAsDataURL(fileInput);
+                await new Promise(resolve => reader.onload = () => { imageBase64Data = reader.result; resolve(); });
+            }
+
+            try {
+                if(musicId) {
+                    await set(ref(db, `musicTracks/${musicId}`), { title, url, image: imageBase64Data });
+                    alert("Music track successfully update ho gaya!");
+                } else {
+                    await set(push(ref(db, 'musicTracks')), { title, url, image: imageBase64Data });
+                    alert("Music track gallery me add ho gaya!");
+                }
+                document.getElementById('musicFormHeader').innerText = "🎵 Add Music Gallery Track";
+                document.getElementById('editMusicId').value = "";
+                document.getElementById('existingMusicImgUrl').value = "";
+                document.getElementById('musicTrackSubmitBtn').innerText = "Upload Track to Server";
+                this.reset();
+                await loadAppCoreEngine();
+                initAdminPanel();
+            } catch(e) { alert("Operation Failed."); }
+            finally { submitBtn.disabled = false; }
+        });
+
+        document.getElementById('categoryForm').addEventListener('submit', async function(e){
+            e.preventDefault(); 
+            const catId = document.getElementById('editCatId').value;
+            const name = document.getElementById('catName').value;
+            const file = document.getElementById('catImageFile').files[0]; 
+            const existingImg = document.getElementById('existingImgUrl').value;
+            
+            let imageBase64Data = existingImg || "";
+            if (file) { 
+                const reader = new FileReader(); reader.readAsDataURL(file); 
+                await new Promise(r => reader.onload = () => { imageBase64Data = reader.result; r(); }); 
+            }
+
+            if(catId) {
+                const currentOrder = masterCategoriesData[catId]?.order || 0;
+                await set(ref(db, `categories/${catId}`), { name, image: imageBase64Data, order: currentOrder });
+                alert("Category update ho gayi!");
+            } else {
+                const orderIndex = masterCategoriesArray.length;
+                await set(push(ref(db, 'categories')), { name, image: imageBase64Data, order: orderIndex });
+                alert("Nayi Category add ho gayi!");
+            }
+
+            document.getElementById('categoryFormHeader').innerText = "📁 Create Category";
+            document.getElementById('editCatId').value = "";
+            document.getElementById('existingImgUrl').value = "";
+            document.getElementById('categorySubmitBtn').innerText = "Save Category";
+            this.reset(); 
+            await loadAppCoreEngine(); 
+            initAdminPanel();
+        });
+
+        document.getElementById('bhajanForm').addEventListener('submit', async function(e){
+            e.preventDefault(); 
+            const bhajanId = document.getElementById('editBhajanId').value;
+            const category = document.getElementById('bhajanCategory').value;
+            const title = document.getElementById('bhajanTitle').value;
+            const url = document.getElementById('bhajanAudioUrl').value;
+            const lyrics = document.getElementById('bhajanLyrics').value;
+
+            if(bhajanId) {
+                await set(ref(db, `bhajans/${bhajanId}`), { category, title, url, lyrics });
+                alert("Bhajan details update ho gaye!");
+            } else {
+                await set(push(ref(db, 'bhajans')), { category, title, url, lyrics });
+                alert("Bhajan database me save ho gaya!");
+            }
+
+            document.getElementById('bhajanFormHeader').innerText = "📜 Add Bhajan Lyrics & Audio";
+            document.getElementById('editBhajanId').value = "";
+            document.getElementById('bhajanAudioUrl').value = "";
+            document.getElementById('bhajanSubmitBtn').innerText = "Upload Lyrics Data";
+            this.reset(); 
+            await loadAppCoreEngine(); 
+            initAdminPanel();
+        });
+
+        document.getElementById('passwordToggleEyeBtn').addEventListener('click', function() {
+            const pInput = document.getElementById('adminGatekeeperPassword');
+            pInput.type = pInput.type === "password" ? "text" : "password";
+        });
+
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.getElementById('themeToggleBtn').addEventListener('click', () => {
+            const nextTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', nextTheme);
+        });
+
+        loadAppCoreEngine();
+    </script>
+</body>
+</html>
