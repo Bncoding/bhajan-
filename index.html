@@ -61,7 +61,7 @@
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
-            padding: 0 0 120px 0;
+            padding: 0 0 140px 0;
             background-color: var(--bg-color);
             color: var(--text-main);
             transition: background-color 0.3s, color 0.3s;
@@ -205,15 +205,28 @@
 
         .password-settings-box { background: rgba(230, 126, 34, 0.05); border: 1px dashed var(--brand-orange); border-radius: var(--radius-md); padding: 15px; margin-bottom: 20px; }
         
+        /* Persistent Audio Player with Seekbar */
         .persistent-player-footer {
-            position: fixed; bottom: 95px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 500px; background: var(--header-bg); border: 1px solid var(--border-color); border-radius: 30px; box-shadow: var(--shadow-lg); display: none; align-items: center; justify-content: space-between; padding: 10px 20px; box-sizing: border-box; z-index: 998;
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 500px; background: var(--header-bg); border: 1px solid var(--border-color); border-radius: 20px; box-shadow: var(--shadow-lg); display: none; flex-direction: column; gap: 6px; padding: 12px 18px; box-sizing: border-box; z-index: 998;
         }
+        .footer-main-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; }
         .footer-track-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
-        .footer-track-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; animation: spin 4s linear infinite; animation-play-state: paused; }
-        .footer-track-meta { min-width: 0; }
+        .footer-track-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; animation: spin 4s linear infinite; animation-play-state: paused; }
+        .footer-track-meta { min-width: 0; flex: 1; }
         .footer-title { font-size: 0.85rem; font-weight: 800; margin: 0; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .footer-status { font-size: 0.7rem; color: var(--brand-orange); font-weight: 600; margin: 0; }
-        .footer-controls-btn { background: var(--gradient-orange); border: none; width: 38px; height: 38px; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .footer-status { font-size: 0.7rem; color: var(--brand-orange); font-weight: 600; margin: 2px 0 0 0; }
+        .footer-controls-btn { background: var(--gradient-orange); border: none; width: 38px; height: 38px; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        
+        /* Audio Seek Bar CSS */
+        .seekbar-container { display: flex; align-items: center; gap: 8px; width: 100%; }
+        .seekbar-time { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); width: 35px; text-align: center; }
+        .seekbar-slider {
+            -webkit-appearance: none; width: 100%; height: 4px; border-radius: 5px; background: var(--border-color); outline: none; cursor: pointer; flex: 1;
+        }
+        .seekbar-slider::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--brand-orange); cursor: pointer; transition: 0.2s;
+        }
+
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         @keyframes professionalMarquee {
@@ -366,17 +379,25 @@
         </div>
     </section>
 
+    <!-- Persistent Music Player with Duration & Seekbar Control -->
     <div class="persistent-player-footer" id="globalMediaBottomControls">
-        <div class="footer-track-info">
-            <img src="" class="footer-track-img" id="footerPlayerThumb" alt="Thumb">
-            <div class="footer-track-meta">
-                <p class="footer-title" id="footerPlayerTitle">No Track Playing</p>
-                <p class="footer-status" id="footerPlayerStatus">Playing...</p>
+        <div class="footer-main-row">
+            <div class="footer-track-info">
+                <img src="" class="footer-track-img" id="footerPlayerThumb" alt="Thumb">
+                <div class="footer-track-meta">
+                    <p class="footer-title" id="footerPlayerTitle">No Track Playing</p>
+                    <p class="footer-status" id="footerPlayerStatus">Paused</p>
+                </div>
             </div>
+            <button class="footer-controls-btn" id="footerPlayPauseActionButton">
+                <svg viewBox="0 0 24 24" id="footerControlIcon" width="16" height="16" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </button>
         </div>
-        <button class="footer-controls-btn" id="footerPlayPauseActionButton">
-            <svg viewBox="0 0 24 24" id="footerControlIcon" width="16" height="16" fill="white"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </button>
+        <div class="seekbar-container">
+            <span class="seekbar-time" id="currentTimeLabel">00:00</span>
+            <input type="range" class="seekbar-slider" id="audioSeekSlider" value="0" min="0" max="100">
+            <span class="seekbar-time" id="totalDurationLabel">00:00</span>
+        </div>
     </div>
 
     <nav class="bottom-nav">
@@ -462,6 +483,15 @@
                 if (idMatch && idMatch[1]) return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
             }
             return cleanLink;
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            let mins = Math.floor(seconds / 60);
+            let secs = Math.floor(seconds % 60);
+            if (mins < 10) mins = "0" + mins;
+            if (secs < 10) secs = "0" + secs;
+            return `${mins}:${secs}`;
         }
 
         function navigateTo(sectionId) {
@@ -608,7 +638,7 @@
                     pushNavigation('lyrics-section');
 
                     if (found.url && found.url.trim() !== "") {
-                        await handleTrackPlaybackTrigger({
+                        await loadTrackIntoPlayer({
                             id: found.id,
                             title: found.title,
                             url: found.url,
@@ -666,14 +696,19 @@
                 }, 50);
 
                 card.querySelector('.track-play-btn').addEventListener('click', async function() {
-                    await handleTrackPlaybackTrigger(track);
+                    if (activePlayingTrackObject && activePlayingTrackObject.id === track.id) {
+                        togglePlayPause();
+                    } else {
+                        await loadTrackIntoPlayer(track);
+                    }
                 });
                 trackGrid.appendChild(card);
             });
         }
         document.getElementById('userMusicSearchInput').addEventListener('input', renderUserMusicGallery);
 
-        async function handleTrackPlaybackTrigger(track) {
+        // Load Track without Auto-Playing
+        async function loadTrackIntoPlayer(track) {
             const footerBar = document.getElementById('globalMediaBottomControls');
             const footerIcon = document.getElementById('footerControlIcon');
             const footerImg = document.getElementById('footerPlayerThumb');
@@ -683,58 +718,85 @@
                 return;
             }
 
+            activePlayingTrackObject = track;
             const processedUrl = sanitizeRawMediaUrl(track.url);
 
-            if (activePlayingTrackObject && activePlayingTrackObject.id === track.id) {
-                if (!CoreAudioStreamer.paused) {
-                    CoreAudioStreamer.pause();
-                    footerImg.style.animationPlayState = "paused";
-                    document.getElementById('footerPlayerStatus').innerText = "Paused";
-                    footerIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
-                } else {
-                    try {
-                        await CoreAudioStreamer.play();
-                        footerImg.style.animationPlayState = "running";
-                        document.getElementById('footerPlayerStatus').innerText = "Playing...";
-                        footerIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
-                    } catch (err) {
-                        console.error("Playback error:", err);
-                        alert("ऑडियो प्ले करने में समस्या आई। कृपया यूआरएल जांचें।");
-                    }
-                }
-            } else {
-                activePlayingTrackObject = track;
-                
-                // Reset Audio Instance for iOS/Safari Support
+            CoreAudioStreamer.pause();
+            CoreAudioStreamer.removeAttribute('src');
+            CoreAudioStreamer.load();
+
+            CoreAudioStreamer.src = processedUrl;
+
+            // Display UI elements in Paused state
+            footerBar.style.display = "flex";
+            document.getElementById('footerPlayerTitle').innerText = track.title;
+            document.getElementById('footerPlayerStatus').innerText = "Paused";
+            footerImg.src = track.image || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150';
+            footerImg.style.animationPlayState = "paused";
+            footerIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+
+            renderUserMusicGallery();
+        }
+
+        // Toggle Play / Pause Action
+        async function togglePlayPause() {
+            const footerIcon = document.getElementById('footerControlIcon');
+            const footerImg = document.getElementById('footerPlayerThumb');
+
+            if (!activePlayingTrackObject) return;
+
+            if (!CoreAudioStreamer.paused) {
                 CoreAudioStreamer.pause();
-                CoreAudioStreamer.removeAttribute('src');
-                CoreAudioStreamer.load();
-
-                CoreAudioStreamer.src = processedUrl;
-
+                footerImg.style.animationPlayState = "paused";
+                document.getElementById('footerPlayerStatus').innerText = "Paused";
+                footerIcon.innerHTML = `<path d="M8 5v14l11-7z"/>`;
+            } else {
                 try {
                     await CoreAudioStreamer.play();
-
-                    footerBar.style.display = "flex";
-                    document.getElementById('footerPlayerTitle').innerText = track.title;
-                    document.getElementById('footerPlayerStatus').innerText = "Playing...";
-                    footerImg.src = track.image || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150';
                     footerImg.style.animationPlayState = "running";
+                    document.getElementById('footerPlayerStatus').innerText = "Playing...";
                     footerIcon.innerHTML = `<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>`;
-                } catch(e) {
-                    console.error("Audio playback error: ", e);
-                    alert("यह ऑडियो फॉर्मेट इस ब्राउजर द्वारा समर्थित नहीं है। कृपया डायरेक्ट .mp3 लिंक जांचें।");
+                } catch (err) {
+                    console.error("Playback error:", err);
+                    alert("ऑडियो प्ले करने में समस्या आई। कृपया direct mp3 यूआरएल जांचें।");
                 }
             }
             renderUserMusicGallery();
         }
 
-        document.getElementById('footerPlayPauseActionButton').addEventListener('click', async () => {
-            if(activePlayingTrackObject) await handleTrackPlaybackTrigger(activePlayingTrackObject);
+        document.getElementById('footerPlayPauseActionButton').addEventListener('click', togglePlayPause);
+
+        // Audio Seekbar & Time Updates
+        const audioSeekSlider = document.getElementById('audioSeekSlider');
+        const currentTimeLabel = document.getElementById('currentTimeLabel');
+        const totalDurationLabel = document.getElementById('totalDurationLabel');
+
+        CoreAudioStreamer.addEventListener('loadedmetadata', () => {
+            totalDurationLabel.innerText = formatTime(CoreAudioStreamer.duration);
         });
+
+        CoreAudioStreamer.addEventListener('timeupdate', () => {
+            if (CoreAudioStreamer.duration) {
+                const progressPercent = (CoreAudioStreamer.currentTime / CoreAudioStreamer.duration) * 100;
+                audioSeekSlider.value = progressPercent;
+                currentTimeLabel.innerText = formatTime(CoreAudioStreamer.currentTime);
+                totalDurationLabel.innerText = formatTime(CoreAudioStreamer.duration);
+            }
+        });
+
+        audioSeekSlider.addEventListener('input', () => {
+            if (CoreAudioStreamer.duration) {
+                const seekToTime = (audioSeekSlider.value / 100) * CoreAudioStreamer.duration;
+                CoreAudioStreamer.currentTime = seekToTime;
+            }
+        });
+
         CoreAudioStreamer.addEventListener('ended', () => {
             document.getElementById('footerPlayerThumb').style.animationPlayState = "paused";
+            document.getElementById('footerPlayerStatus').innerText = "Paused";
             document.getElementById('footerControlIcon').innerHTML = `<path d="M8 5v14l11-7z"/>`;
+            audioSeekSlider.value = 0;
+            currentTimeLabel.innerText = "00:00";
             renderUserMusicGallery();
         });
 
