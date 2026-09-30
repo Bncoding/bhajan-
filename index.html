@@ -205,9 +205,11 @@
 
         .password-settings-box { background: rgba(230, 126, 34, 0.05); border: 1px dashed var(--brand-orange); border-radius: var(--radius-md); padding: 15px; margin-bottom: 20px; }
         
-        /* Persistent Audio Player with Seekbar */
+        /* Persistent Audio Player with Seekbar & Swipe Close */
         .persistent-player-footer {
             position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%); width: calc(100% - 30px); max-width: 500px; background: var(--header-bg); border: 1px solid var(--border-color); border-radius: 20px; box-shadow: var(--shadow-lg); display: none; flex-direction: column; gap: 6px; padding: 12px 18px; box-sizing: border-box; z-index: 998;
+            transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+            touch-action: pan-y;
         }
         .footer-main-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; }
         .footer-track-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
@@ -215,8 +217,14 @@
         .footer-track-meta { min-width: 0; flex: 1; }
         .footer-title { font-size: 0.85rem; font-weight: 800; margin: 0; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .footer-status { font-size: 0.7rem; color: var(--brand-orange); font-weight: 600; margin: 2px 0 0 0; }
+        
+        .footer-action-buttons-group { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
         .footer-controls-btn { background: var(--gradient-orange); border: none; width: 38px; height: 38px; border-radius: 50%; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         
+        .footer-close-btn { background: transparent; border: 1px solid var(--border-color); width: 30px; height: 30px; border-radius: 50%; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .footer-close-btn:hover { background: rgba(230, 81, 0, 0.1); color: var(--brand-orange); border-color: var(--brand-orange); }
+        .footer-close-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
         /* Audio Seek Bar CSS */
         .seekbar-container { display: flex; align-items: center; gap: 8px; width: 100%; }
         .seekbar-time { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); width: 35px; text-align: center; }
@@ -379,7 +387,7 @@
         </div>
     </section>
 
-    <!-- Persistent Music Player with Duration & Seekbar Control -->
+    <!-- Persistent Music Player with Duration, Seekbar & Swipe-to-Close Control -->
     <div class="persistent-player-footer" id="globalMediaBottomControls">
         <div class="footer-main-row">
             <div class="footer-track-info">
@@ -389,9 +397,14 @@
                     <p class="footer-status" id="footerPlayerStatus">Paused</p>
                 </div>
             </div>
-            <button class="footer-controls-btn" id="footerPlayPauseActionButton">
-                <svg viewBox="0 0 24 24" id="footerControlIcon" width="16" height="16" fill="white"><path d="M8 5v14l11-7z"/></svg>
-            </button>
+            <div class="footer-action-buttons-group">
+                <button class="footer-controls-btn" id="footerPlayPauseActionButton">
+                    <svg viewBox="0 0 24 24" id="footerControlIcon" width="16" height="16" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button class="footer-close-btn" id="footerClosePlayerBtn" title="Close Player">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
         </div>
         <div class="seekbar-container">
             <span class="seekbar-time" id="currentTimeLabel">00:00</span>
@@ -727,8 +740,11 @@
 
             CoreAudioStreamer.src = processedUrl;
 
-            // Display UI elements in Paused state
+            // Reset transform & Display UI
+            footerBar.style.transform = "translateX(-50%)";
+            footerBar.style.opacity = "1";
             footerBar.style.display = "flex";
+
             document.getElementById('footerPlayerTitle').innerText = track.title;
             document.getElementById('footerPlayerStatus').innerText = "Paused";
             footerImg.src = track.image || 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150';
@@ -737,6 +753,59 @@
 
             renderUserMusicGallery();
         }
+
+        // Close Player Functionality
+        function closeMusicPlayer() {
+            CoreAudioStreamer.pause();
+            CoreAudioStreamer.currentTime = 0;
+            activePlayingTrackObject = null;
+            
+            const footerBar = document.getElementById('globalMediaBottomControls');
+            footerBar.style.display = "none";
+            footerBar.style.transform = "translateX(-50%)";
+            footerBar.style.opacity = "1";
+            
+            renderUserMusicGallery();
+        }
+
+        document.getElementById('footerClosePlayerBtn').addEventListener('click', closeMusicPlayer);
+
+        // Touch Swipe (Left/Right) to Close Player
+        const footerBarElement = document.getElementById('globalMediaBottomControls');
+        let touchStartX = 0;
+        let touchCurrentX = 0;
+        let isSwiping = false;
+
+        footerBarElement.addEventListener('touchstart', (e) => {
+            if (e.target.closest('#audioSeekSlider') || e.target.closest('button')) return;
+            touchStartX = e.touches[0].clientX;
+            isSwiping = true;
+            footerBarElement.style.transition = 'none';
+        }, { passive: true });
+
+        footerBarElement.addEventListener('touchmove', (e) => {
+            if (!isSwiping) return;
+            touchCurrentX = e.touches[0].clientX;
+            const diffX = touchCurrentX - touchStartX;
+            footerBarElement.style.transform = `calc(-50% + ${diffX}px)`;
+            footerBarElement.style.opacity = `${1 - Math.abs(diffX) / 250}`;
+        }, { passive: true });
+
+        footerBarElement.addEventListener('touchend', () => {
+            if (!isSwiping) return;
+            isSwiping = false;
+            const diffX = touchCurrentX - touchStartX;
+            footerBarElement.style.transition = 'transform 0.25s ease-out, opacity 0.25s ease-out';
+
+            if (Math.abs(diffX) > 100) {
+                closeMusicPlayer();
+            } else {
+                footerBarElement.style.transform = "translateX(-50%)";
+                footerBarElement.style.opacity = "1";
+            }
+            touchStartX = 0;
+            touchCurrentX = 0;
+        });
 
         // Toggle Play / Pause Action
         async function togglePlayPause() {
